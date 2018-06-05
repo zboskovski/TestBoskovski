@@ -1,0 +1,51 @@
+﻿@model Crawler.Demo.Models.CrawlerModel
+
+@{
+    /**/
+
+    ViewBag.Title = "Home Page";
+}
+
+<div class="clearfix"></div>
+@using (Html.BeginForm("Index", "Home"))
+{
+<div class="row">
+    @Html.LabelFor(x => x.Uri, "Enter domain")
+    @Html.TextBoxFor(x => x.Uri)
+    @Html.ValidationMessageFor(x => x.Uri, "", new { @class = "text-danger" })
+</div>
+    <div class="row">
+        <button class="btn-default" title="Crawl" value="Crawl" type="submit">Crawl</button>
+    </div>
+
+    if (Model.Links.Count > 0)
+    {
+        <div class="row">&nbsp;</div>
+        <div class="row ">
+            Links
+        </div>
+        <div class="row">&nbsp;</div>
+
+        <div class="row">
+            <table class="tablesorter table-bordered">
+                <thead>
+                    <tr>
+                        <td>
+                            Link
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var link in Model.Links)
+                    {
+                        <tr>
+                            <td>
+                                <a href='@link'>@link</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+}
